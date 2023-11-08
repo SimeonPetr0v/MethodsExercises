@@ -13,12 +13,16 @@
             }
             static bool PasswordValid(string pass)
             {
-                bool isValid = true;
-                 if(!IsLengthValid(pass) || !IsCharachterValid(pass) || !RequiredD(pass))
+                
+                int cheks = 0;
+                if (IsLengthValid(pass)) cheks++;
+                if(IsCharachterValid(pass)) cheks++;
+                if(RequiredD(pass)) cheks++;
+                 if(cheks == 3)
                 {
-                    isValid = false;
+                    return true;
                 }
-                 return isValid;
+                 return false;
             }
             static bool IsLengthValid(string pass)
             {
@@ -44,20 +48,24 @@
             }
             static bool RequiredD(string pass)
             {
+                string num = "1234567890";
                 int dCount = 0;
                 foreach(char c in pass)
                 {
-                    if (char.IsDigit(c))
+                    if (num.Contains(c))
                     {
                         dCount++;
                     }
                 }
-                if(dCount < 2)
+                if (dCount >= 2)
+                {
+                    return true;
+                }
+                else
                 {
                     Console.WriteLine("Password must have at least 2 digits");
                     return false;
                 }
-                return true;
             }
         }
     }
